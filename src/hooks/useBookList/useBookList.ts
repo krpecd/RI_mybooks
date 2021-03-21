@@ -1,5 +1,5 @@
 import { useCallback, useContext } from "react"
-import { getAll } from "../../BooksAPI"
+import { getAll } from "../../api/Books"
 import { BookListContext } from "./BookListContext"
 import { UseBookListReturn } from "./types"
 
@@ -10,7 +10,6 @@ const useBookList = (): UseBookListReturn => {
     setState(state => ({...state, isBookListLoading: true}))
     getAll()
       .then(res => {
-        console.log(res)
         setState(state => ({
           ...state,
           isBookListLoading: false,

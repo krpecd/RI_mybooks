@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react'
 import { BookListContextProps, BookListContextProviderProps, BookListContextState } from './types'
 
-const initialState = { bookList: null, isBookListLoading: false }
+const initialState = { bookList: null, isBookListLoading: true }
 
 const BookListContext = createContext<BookListContextProps>([ initialState, () => {} ])
 

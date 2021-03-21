@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import { Book } from "../../api/types"
 
 export interface UseBookListReturn {
   loadBookList: VoidFunction
@@ -6,7 +7,7 @@ export interface UseBookListReturn {
 }
 
 export interface BookListContextState {
-  bookList: any[] | null
+  bookList: Book[] | null
   isBookListLoading: boolean
 }
 
