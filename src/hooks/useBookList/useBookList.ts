@@ -1,5 +1,6 @@
 import { useCallback, useContext } from "react"
 import { getAll } from "../../api/Books"
+import { Book, ShelfType } from "../../api/types"
 import { BookListContext } from "./BookListContext"
 import { UseBookListReturn } from "./types"
 
@@ -26,9 +27,16 @@ const useBookList = (): UseBookListReturn => {
         }))
       }) 
   }, [setState])
+
+  const getBooksByShelf = (shelf: ShelfType): Book[] | undefined => {
+    return state.bookList?.filter(book => book.shelf === shelf)
+  }
   
   return {
     loadBookList,
+    currentlyReading: getBooksByShelf('currentlyReading'),
+    wantToRead: getBooksByShelf('wantToRead'),
+    read: getBooksByShelf('read'),
     isBookListLoading: state.isBookListLoading
   }
 }

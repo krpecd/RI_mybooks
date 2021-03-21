@@ -3,6 +3,9 @@ import { Book } from "../../api/types"
 
 export interface UseBookListReturn {
   loadBookList: VoidFunction
+  currentlyReading?: Book[]
+  wantToRead?: Book[]
+  read?: Book[]
   isBookListLoading: boolean
 }
 
