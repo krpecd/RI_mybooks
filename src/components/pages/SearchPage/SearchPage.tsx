@@ -2,9 +2,17 @@ import React from 'react'
 import {useHistory} from 'react-router-dom'
 import {mainPageRoute} from '../../router/routes'
 import './SearchPage.css'
+import { SearchPageProps } from './types'
+import debounce from 'lodash/debounce'
+import BooksGrid from '../../BooksGrid'
 
-function SearchPage() {
+function SearchPage(props: SearchPageProps) {
+  const {setSearchTerm, results} = props
   const history = useHistory()
+
+  const handleInputChange = debounce(searchTerm => {
+    setSearchTerm(searchTerm)
+  }, 300)
 
   return (
     <div className="search-books">
@@ -23,12 +31,18 @@ function SearchPage() {
             However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
             you don't find a specific author or title. Every search is limited by search terms.
           */}
-          <input type="text" placeholder="Search by title or author" />
+          <input 
+            type="text" 
+            placeholder="Search by title or author"
+            onChange={e => handleInputChange(e.target.value)} 
+          />
         </div>
       </div>
-      <div className="search-books-results">
-        <ol className="books-grid" />
-      </div>
+      {!!results?.length &&
+        <div className="search-books-results">
+          <BooksGrid bookList={results} />
+        </div>
+      }
     </div>
   )
 }

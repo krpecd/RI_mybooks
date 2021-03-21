@@ -8,7 +8,7 @@ export type ShelfType = 'currentlyReading' | 'wantToRead' | 'read'
 export interface Book {
   title: string
   subtitle: string
-  authors: string[]
+  authors?: string[]
   publisher: string
   publishedDate: string
   description: string
@@ -38,5 +38,5 @@ export interface Book {
   infoLink: string
   canonicalVolumeLink: string
   id: string
-  shelf: ShelfType
+  shelf?: ShelfType
 }

@@ -33,7 +33,7 @@ export const update = (book: Book, shelf: ShelfType) =>
     body: JSON.stringify({ shelf })
   }).then(res => res.json())
 
-export const search = (query: string) =>
+export const search = (query: string): Promise<Book[]> =>
   fetch(`${api}/search`, {
     method: 'POST',
     headers: {

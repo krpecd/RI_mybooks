@@ -17,19 +17,27 @@ function Book(props: BookProps) {
           }}
         />
         <div className="book-shelf-changer">
-          <select>
+          <select value={book.shelf ?? "move"}>
             <option value="move" disabled>
               Move to...
             </option>
-            <option value="currentlyReading">Currently Reading</option>
-            <option value="wantToRead">Want to Read</option>
-            <option value="read">Read</option>
-            <option value="none">None</option>
+            <option value="currentlyReading" disabled={book.shelf === 'currentlyReading'}>
+              Currently Reading
+            </option>
+            <option value="wantToRead" disabled={book.shelf === 'wantToRead'}>
+              Want to Read
+            </option>
+            <option value="read" disabled={book.shelf === 'read'}>
+              Read
+            </option>
+            {book?.shelf && <option value="none">None</option>}
           </select>
         </div>
       </div>
       <div className="book-title">{book.title}</div>
-      <div className="book-authors">{book.authors.join(', ')}</div>
+      {!!book.authors?.length &&
+        <div className="book-authors">{book.authors.join(', ')}</div>
+      }
     </div>
   )
 }
