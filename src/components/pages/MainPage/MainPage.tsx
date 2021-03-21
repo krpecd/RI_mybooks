@@ -1,10 +1,14 @@
 import React from 'react'
 import BookShelf from '../../BookShelf'
 import { MainPageProps } from './types'
+import {useHistory} from 'react-router-dom'
+import {searchPageRoute} from '../../router/routes'
 import './MainPage.css'
 
 function MainPage(props: MainPageProps) {
   const {loading, currentlyReading, wantToRead, read} = props
+
+  const history = useHistory()
 
   return (
     <div className="list-books">
@@ -35,6 +39,11 @@ function MainPage(props: MainPageProps) {
             />
           }
         </div>
+      </div>
+      <div className="open-search">
+        <button onClick={() => history.push(searchPageRoute.path)}>
+          Add a book
+        </button>
       </div>
     </div>
   )
