@@ -1,5 +1,6 @@
 import React from 'react'
 import { BookProps } from './types'
+import './Book.css'
 
 function Book(props: BookProps) {
   const {book} = props

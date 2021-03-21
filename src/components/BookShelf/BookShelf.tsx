@@ -1,22 +1,19 @@
 import React from 'react'
-import Book from '../Book'
 import { BookShelfProps } from './types'
+import './BookShelf.css'
+import BooksGrid from '../BooksGrid'
 
 function BookShelf(props: BookShelfProps) {
-  const {loading, title, bookList} = props
+  const {title, bookList} = props
 
   return (
     <div className="bookshelf">
       <h2 className="bookshelf-title">{title}</h2>
-      <div className="bookshelf-books">
-        <ol className="books-grid">
-          {bookList?.map(book => (
-            <li key={book.id}>
-              <Book book={book} />
-            </li>
-          ))}
-        </ol>
-      </div>
+      {bookList?.length &&
+        <div className="bookshelf-books">
+          <BooksGrid bookList={bookList} />
+        </div>
+      }
     </div>
   )
 }
