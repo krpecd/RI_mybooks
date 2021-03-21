@@ -1,10 +1,13 @@
 import React from 'react'
+import { BookListContextProvider } from './components/hooks/useBookList/BookListContext'
 import Router from './components/router'
 
 function App() {
   return (
     <div className="app">
-      <Router />
+      <BookListContextProvider>
+        <Router />
+      </BookListContextProvider>
     </div>
   )
 }
