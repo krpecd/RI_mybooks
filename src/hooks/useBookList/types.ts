@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { Book, ShelfType } from "../../api/types"
+import { Book, BooksInShelfs, ShelfType } from "../../api/types"
 
 export interface UseBookListReturn {
   loadBookList: VoidFunction
@@ -8,11 +8,12 @@ export interface UseBookListReturn {
   read?: Book[]
   isBookListLoading: boolean
   isBookListLoaded: boolean
-  changeBookShelf: (book: Book, targetShelf: ShelfType) => void
+  setBooksInShelfs: (booksInShelfs: BooksInShelfs) => void
 }
 
 export interface BookListContextState {
-  bookList: Book[] | null
+  bookList: Book[] | null,
+  booksInShelfs: BooksInShelfs | null 
   isBookListLoading: boolean
   isBookListLoaded: boolean
 }

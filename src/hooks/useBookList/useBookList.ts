@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react"
 import { getAll } from "../../api/Books"
-import { Book, ShelfType } from "../../api/types"
+import { Book, BooksInShelfs, ShelfType } from "../../api/types"
 import { BookListContext } from "./BookListContext"
 import { UseBookListReturn } from "./types"
 import {toast} from 'react-toastify'
@@ -12,11 +12,17 @@ const useBookList = (): UseBookListReturn => {
     setState(state => ({...state, isBookListLoading: true}))
     getAll()
       .then(res => {
+        const booksInShelfs: BooksInShelfs = {
+          currentlyReading: res?.filter(book => book.shelf === 'currentlyReading').map(book => book.id) ?? [],
+          wantToRead: res?.filter(book => book.shelf === 'wantToRead').map(book => book.id) ?? [],
+          read: res?.filter(book => book.shelf === 'read').map(book => book.id) ?? []
+        } 
         setState(state => ({
           ...state,
           isBookListLoaded: true,
           isBookListLoading: false,
-          bookList: res 
+          bookList: res,
+          booksInShelfs: booksInShelfs
         }))
       })
       .catch(err => {
@@ -31,14 +37,15 @@ const useBookList = (): UseBookListReturn => {
   }, [setState])
 
   const getBooksByShelf = (shelf: ShelfType): Book[] | undefined => {
-    return state.bookList?.filter(book => book.shelf === shelf)
+    const shelfBookIds = state?.booksInShelfs?.[shelf]
+    return state.bookList?.filter(book => shelfBookIds?.includes(book.id))
   }
 
-  const changeBookShelf = (book: Book, targetShelf: ShelfType): void => {
-    const newBooks = state.bookList?.filter(item => item.id !== book.id) ?? []
-    book.shelf = targetShelf
-    newBooks.push(book)
-    setState(state => ({...state, bookList: newBooks}))
+  const setBooksInShelfs = (booksInShelfs: BooksInShelfs): void => {
+    setState(state => ({
+      ...state,
+      booksInShelfs: booksInShelfs
+    }))
   }
   
   return {
@@ -48,7 +55,7 @@ const useBookList = (): UseBookListReturn => {
     read: getBooksByShelf('read'),
     isBookListLoading: state.isBookListLoading,
     isBookListLoaded: state.isBookListLoaded,
-    changeBookShelf
+    setBooksInShelfs
   }
 }
 

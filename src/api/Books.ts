@@ -1,4 +1,4 @@
-import { Book, ShelfType } from "./types"
+import { Book, BooksInShelfs, ShelfType } from "./types"
 
 const api = "https://reactnd-books-api.udacity.com"
 
@@ -23,7 +23,7 @@ export const getAll = (): Promise<Book[]> =>
     .then(res => res.json())
     .then(data => data.books)
 
-export const update = (book: Book, shelf: ShelfType): Promise<{currentyReading: string[], wantToRead: string[], read: string[]}> =>
+export const update = (book: Book, shelf: ShelfType | 'none'): Promise<BooksInShelfs> =>
   fetch(`${api}/books/${book.id}`, {
     method: 'PUT',
     headers: {

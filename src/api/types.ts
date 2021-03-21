@@ -3,7 +3,7 @@ export interface IndustryIdentifier {
   identifier: string
 }
 
-export type ShelfType = 'currentlyReading' | 'wantToRead' | 'read' | 'none'
+export type ShelfType = 'currentlyReading' | 'wantToRead' | 'read'
 
 export interface Book {
   title: string
@@ -39,4 +39,10 @@ export interface Book {
   canonicalVolumeLink: string
   id: string
   shelf?: ShelfType
+}
+
+export interface BooksInShelfs{
+  currentlyReading: string[]
+  wantToRead: string[]
+  read: string[]
 }

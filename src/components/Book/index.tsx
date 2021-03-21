@@ -8,10 +8,10 @@ import {toast} from 'react-toastify'
 
 function BookContainer(props: BookContainerProps) {
   const {book} = props
-  const {changeBookShelf: changeBookShelfInLocalState} = useBookList()
+  const {setBooksInShelfs} = useBookList()
   const [isChangingShelf, setIsChangingShelf] = useState<boolean>(false)
 
-  const changeBookShelf = (shelf: ShelfType) => {
+  const changeBookShelf = (shelf: ShelfType | 'none') => {
     setIsChangingShelf(true)
     update(book, shelf)
       .then((res) => {
@@ -21,7 +21,7 @@ function BookContainer(props: BookContainerProps) {
         } else {
           toast.success(`${book.title} was successfully added to ${shelf} shelf`)
         }
-        changeBookShelfInLocalState(book, shelf)
+        setBooksInShelfs(res)
       })
       .catch(err => {
         toast.error('Something went wrong.')
