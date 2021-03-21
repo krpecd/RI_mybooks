@@ -1,4 +1,5 @@
 import React from 'react'
+import Book from '../Book'
 import { BookShelfProps } from './types'
 
 function BookShelf(props: BookShelfProps) {
@@ -11,7 +12,7 @@ function BookShelf(props: BookShelfProps) {
         <ol className="books-grid">
           {bookList?.map(book => (
             <li key={book.id}>
-              <>{book.title}</>
+              <Book book={book} />
             </li>
           ))}
         </ol>
