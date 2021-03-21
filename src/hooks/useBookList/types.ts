@@ -7,11 +7,13 @@ export interface UseBookListReturn {
   wantToRead?: Book[]
   read?: Book[]
   isBookListLoading: boolean
+  isBookListLoaded: boolean
 }
 
 export interface BookListContextState {
   bookList: Book[] | null
   isBookListLoading: boolean
+  isBookListLoaded: boolean
 }
 
 export type BookListContextProps = [

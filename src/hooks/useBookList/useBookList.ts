@@ -13,6 +13,7 @@ const useBookList = (): UseBookListReturn => {
       .then(res => {
         setState(state => ({
           ...state,
+          isBookListLoaded: true,
           isBookListLoading: false,
           bookList: res 
         }))
@@ -37,7 +38,8 @@ const useBookList = (): UseBookListReturn => {
     currentlyReading: getBooksByShelf('currentlyReading'),
     wantToRead: getBooksByShelf('wantToRead'),
     read: getBooksByShelf('read'),
-    isBookListLoading: state.isBookListLoading
+    isBookListLoading: state.isBookListLoading,
+    isBookListLoaded: state.isBookListLoaded
   }
 }
 

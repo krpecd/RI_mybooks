@@ -8,12 +8,15 @@ function MainPageContainer() {
     isBookListLoading,
     currentlyReading,
     wantToRead,
-    read
+    read,
+    isBookListLoaded
   } = useBookList()
 
   useEffect(() => {
-    loadBookList()
-  }, [loadBookList])
+    if (!isBookListLoaded) {
+      loadBookList()
+    }
+  }, [loadBookList, isBookListLoaded])
 
   return (
     <MainPage 
