@@ -2,10 +2,18 @@ import React from 'react'
 import { BookProps } from './types'
 import './Book.css'
 import { ShelfType } from '../../api/types'
+import useBookList from '../../hooks/useBookList'
 
 function Book(props: BookProps) {
   const {book, changeBookShelf, isChangingShelf} = props
 
+  /**
+   * We need to determine to which shelf the book contains.
+   * Because the search results doesn't know to which shelf the book belongs
+   * */
+  const {getBookShelf} = useBookList()
+  const shelf = getBookShelf(book.id)
+  
   return (
     <div className="book">
       <div className="book-top">
@@ -20,7 +28,7 @@ function Book(props: BookProps) {
         <div className={`book-shelf-changer ${isChangingShelf ? 'book-shelf-changer--spinning' : ''}`}>
           <select
             onChange={e => changeBookShelf(e.target.value as ShelfType)} 
-            value={book.shelf ?? "none"}
+            value={shelf}
             disabled={isChangingShelf}
           >
             <option value="move" disabled>

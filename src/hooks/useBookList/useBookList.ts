@@ -41,6 +41,18 @@ const useBookList = (): UseBookListReturn => {
     return state.bookList?.filter(book => shelfBookIds?.includes(book.id))
   }
 
+  const getBookShelf = (bookId: string): ShelfType | 'none' => {
+    let shelf: ShelfType | 'none' = 'none'
+    if (state?.booksInShelfs) {
+      Object.keys(state.booksInShelfs).forEach(key => {
+        if (state?.booksInShelfs?.[key as ShelfType]?.includes(bookId)) {
+          shelf = key as ShelfType
+        }
+      })
+    }
+    return shelf
+  }
+
   const setBooksInShelfs = (booksInShelfs: BooksInShelfs): void => {
     setState(state => ({
       ...state,
@@ -55,7 +67,8 @@ const useBookList = (): UseBookListReturn => {
     read: getBooksByShelf('read'),
     isBookListLoading: state.isBookListLoading,
     isBookListLoaded: state.isBookListLoaded,
-    setBooksInShelfs
+    setBooksInShelfs,
+    getBookShelf
   }
 }
 
