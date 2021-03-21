@@ -12,7 +12,7 @@ function SearchPage(props: SearchPageProps) {
 
   const handleInputChange = debounce(searchTerm => {
     setSearchTerm(searchTerm)
-  }, 300)
+  }, 400)
 
   return (
     <div className="search-books">

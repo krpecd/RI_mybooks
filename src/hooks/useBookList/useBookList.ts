@@ -32,6 +32,13 @@ const useBookList = (): UseBookListReturn => {
   const getBooksByShelf = (shelf: ShelfType): Book[] | undefined => {
     return state.bookList?.filter(book => book.shelf === shelf)
   }
+
+  const changeBookShelf = (book: Book, targetShelf: ShelfType): void => {
+    const newBooks = state.bookList?.filter(item => item.id !== book.id) ?? []
+    book.shelf = targetShelf
+    newBooks.push(book)
+    setState(state => ({...state, bookList: newBooks}))
+  }
   
   return {
     loadBookList,
@@ -39,7 +46,8 @@ const useBookList = (): UseBookListReturn => {
     wantToRead: getBooksByShelf('wantToRead'),
     read: getBooksByShelf('read'),
     isBookListLoading: state.isBookListLoading,
-    isBookListLoaded: state.isBookListLoaded
+    isBookListLoaded: state.isBookListLoaded,
+    changeBookShelf
   }
 }
 

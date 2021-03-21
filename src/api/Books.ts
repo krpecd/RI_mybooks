@@ -23,7 +23,7 @@ export const getAll = (): Promise<Book[]> =>
     .then(res => res.json())
     .then(data => data.books)
 
-export const update = (book: Book, shelf: ShelfType) =>
+export const update = (book: Book, shelf: ShelfType): Promise<{currentyReading: string[], wantToRead: string[], read: string[]}> =>
   fetch(`${api}/books/${book.id}`, {
     method: 'PUT',
     headers: {
