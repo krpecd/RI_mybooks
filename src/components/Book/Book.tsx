@@ -20,22 +20,22 @@ function Book(props: BookProps) {
         <div className={`book-shelf-changer ${isChangingShelf ? 'book-shelf-changer--spinning' : ''}`}>
           <select
             onChange={e => changeBookShelf(e.target.value as ShelfType)} 
-            value={book.shelf ?? "move"}
+            value={book.shelf ?? "none"}
             disabled={isChangingShelf}
           >
             <option value="move" disabled>
               Move to...
             </option>
-            <option value="currentlyReading" disabled={book.shelf === 'currentlyReading'}>
+            <option value="currentlyReading">
               Currently Reading
             </option>
-            <option value="wantToRead" disabled={book.shelf === 'wantToRead'}>
+            <option value="wantToRead">
               Want to Read
             </option>
-            <option value="read" disabled={book.shelf === 'read'}>
+            <option value="read">
               Read
             </option>
-            {book?.shelf && <option value="none">None</option>}
+            <option value="none">None</option>
           </select>
         </div>
       </div>
