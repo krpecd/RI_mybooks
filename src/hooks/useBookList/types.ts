@@ -10,6 +10,7 @@ export interface UseBookListReturn {
   isBookListLoaded: boolean
   setBooksInShelfs: (booksInShelfs: BooksInShelfs) => void
   getBookShelf: (bookId: string) => ShelfType | 'none'
+  addBookToBookList: (book: Book) => void
 }
 
 export interface BookListContextState {

@@ -59,6 +59,16 @@ const useBookList = (): UseBookListReturn => {
       booksInShelfs: booksInShelfs
     }))
   }
+
+  const addBookToBookList = (book: Book): void => {
+    const isAlreadyInList = state.bookList?.find(item => item.id === book.id)
+    if (!isAlreadyInList) {
+      setState(state => ({
+        ...state,
+        bookList: state.bookList?.length ? [...state.bookList, book] : [book]
+      }))
+    }
+  }
   
   return {
     loadBookList,
@@ -68,7 +78,8 @@ const useBookList = (): UseBookListReturn => {
     isBookListLoading: state.isBookListLoading,
     isBookListLoaded: state.isBookListLoaded,
     setBooksInShelfs,
-    getBookShelf
+    getBookShelf,
+    addBookToBookList
   }
 }
 

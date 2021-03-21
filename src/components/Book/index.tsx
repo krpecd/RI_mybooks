@@ -8,7 +8,7 @@ import {toast} from 'react-toastify'
 
 function BookContainer(props: BookContainerProps) {
   const {book} = props
-  const {setBooksInShelfs} = useBookList()
+  const {setBooksInShelfs, addBookToBookList, getBookShelf} = useBookList()
   const [isChangingShelf, setIsChangingShelf] = useState<boolean>(false)
 
   const changeBookShelf = (shelf: ShelfType | 'none') => {
@@ -21,6 +21,7 @@ function BookContainer(props: BookContainerProps) {
         } else {
           toast.success(`${book.title} was successfully added to ${shelf} shelf`)
         }
+        addBookToBookList(book)
         setBooksInShelfs(res)
       })
       .catch(err => {
