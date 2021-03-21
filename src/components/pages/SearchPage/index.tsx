@@ -11,9 +11,12 @@ function SearchPageContainer() {
   useEffect(() => {
     if (searchTerm) {
       setIsSearching(true)
+      setResults(null)
       search(searchTerm)
         .then(res => {
-          setResults(res)
+          if (Array.isArray(res)) {
+            setResults(res)
+          }
           setIsSearching(false)
         })
         .catch(err => {
