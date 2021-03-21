@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { search } from '../../../api/Books'
 import { Book } from '../../../api/types'
 import SearchPage from './SearchPage'
+import {toast} from 'react-toastify'
 
 function SearchPageContainer() {
   const [searchTerm, setSearchTerm] = useState<string>('')
@@ -22,7 +23,7 @@ function SearchPageContainer() {
         .catch(err => {
           setIsSearching(false)
           console.error('Error in search query: ', err)
-          // TODO: notify error
+          toast.error('Something went wrong')
         })
     } else {
       setResults(null)

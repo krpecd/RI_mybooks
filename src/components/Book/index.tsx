@@ -4,6 +4,7 @@ import { ShelfType } from '../../api/types'
 import useBookList from '../../hooks/useBookList'
 import Book from './Book'
 import {BookContainerProps} from './types'
+import {toast} from 'react-toastify'
 
 function BookContainer(props: BookContainerProps) {
   const {book} = props
@@ -15,11 +16,15 @@ function BookContainer(props: BookContainerProps) {
     update(book, shelf)
       .then((res) => {
         setIsChangingShelf(false)
+        if (shelf === 'none') {
+          toast.success(`${book.title} was succesfully removed from ${book.shelf} shelf`)
+        } else {
+          toast.success(`${book.title} was successfully added to ${shelf} shelf`)
+        }
         changeBookShelfInLocalState(book, shelf)
-        // TODO: notify success
       })
       .catch(err => {
-        // TODO: notify error
+        toast.error('Something went wrong.')
         console.error('Error changing book shelf: '+ err)
         setIsChangingShelf(false)
       })

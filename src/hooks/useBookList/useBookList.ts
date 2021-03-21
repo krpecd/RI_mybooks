@@ -3,6 +3,7 @@ import { getAll } from "../../api/Books"
 import { Book, ShelfType } from "../../api/types"
 import { BookListContext } from "./BookListContext"
 import { UseBookListReturn } from "./types"
+import {toast} from 'react-toastify'
 
 const useBookList = (): UseBookListReturn => {
   const [state, setState] = useContext(BookListContext)
@@ -20,7 +21,7 @@ const useBookList = (): UseBookListReturn => {
       })
       .catch(err => {
         console.error('Error loading books:', err)
-        // TODO: notify error
+        toast.error('Something went wrong')
         setState(state => ({
           ...state,
           isBookListLoading: false,
