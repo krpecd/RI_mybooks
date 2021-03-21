@@ -1,5 +1,9 @@
-import { Book } from "../../api/types";
+import { Book, ShelfType } from "../../api/types";
 
-export interface BookProps {
+export interface BookContainerProps {
   book: Book
+}
+export interface BookProps extends BookContainerProps {
+  changeBookShelf: (shelf: ShelfType) => void
+  isChangingShelf: boolean
 }

@@ -1,9 +1,10 @@
 import React from 'react'
 import { BookProps } from './types'
 import './Book.css'
+import { ShelfType } from '../../api/types'
 
 function Book(props: BookProps) {
-  const {book} = props
+  const {book, changeBookShelf, isChangingShelf} = props
 
   return (
     <div className="book">
@@ -16,8 +17,12 @@ function Book(props: BookProps) {
             backgroundImage:`url("${book.imageLinks.smallThumbnail}")`,
           }}
         />
-        <div className="book-shelf-changer">
-          <select value={book.shelf ?? "move"}>
+        <div className={`book-shelf-changer ${isChangingShelf ? 'book-shelf-changer--spinning' : ''}`}>
+          <select
+            onChange={e => changeBookShelf(e.target.value as ShelfType)} 
+            value={book.shelf ?? "move"}
+            disabled={isChangingShelf}
+          >
             <option value="move" disabled>
               Move to...
             </option>

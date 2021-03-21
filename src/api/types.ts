@@ -3,7 +3,7 @@ export interface IndustryIdentifier {
   identifier: string
 }
 
-export type ShelfType = 'currentlyReading' | 'wantToRead' | 'read'
+export type ShelfType = 'currentlyReading' | 'wantToRead' | 'read' | 'none'
 
 export interface Book {
   title: string
