@@ -7,7 +7,7 @@ import debounce from 'lodash/debounce'
 import BooksGrid from '../../BooksGrid'
 
 function SearchPage(props: SearchPageProps) {
-  const {setSearchTerm, results} = props
+  const {setSearchTerm, results, isSearching} = props
   const history = useHistory()
 
   const handleInputChange = debounce(searchTerm => {
@@ -38,9 +38,9 @@ function SearchPage(props: SearchPageProps) {
           />
         </div>
       </div>
-      {!!results?.length &&
+      {!!(isSearching || results?.length) &&
         <div className="search-books-results">
-          <BooksGrid bookList={results} />
+          <BooksGrid bookList={results} loading={isSearching} />
         </div>
       }
     </div>

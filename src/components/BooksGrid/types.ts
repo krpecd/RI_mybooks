@@ -1,5 +1,6 @@
 import { Book } from "../../api/types"
 
 export interface BooksGridProps {
-  bookList: Book[]
+  bookList?: Book[] | null
+  loading: boolean
 }

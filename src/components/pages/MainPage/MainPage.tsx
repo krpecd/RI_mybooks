@@ -7,7 +7,7 @@ import './MainPage.css'
 
 function MainPage(props: MainPageProps) {
   const {loading, currentlyReading, wantToRead, read} = props
-
+  
   const history = useHistory()
 
   return (

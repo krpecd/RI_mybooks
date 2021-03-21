@@ -29,7 +29,7 @@ export interface Book {
     containsEpubBubbles: boolean
     containsImageBubbles: boolean
   }
-  imageLinks: {
+  imageLinks?: {
     smallThumbnail: string
     thumbnail: string
   }

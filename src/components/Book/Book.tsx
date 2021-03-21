@@ -14,7 +14,7 @@ function Book(props: BookProps) {
           style={{
             width: 128,
             height: 192,
-            backgroundImage:`url("${book.imageLinks.smallThumbnail}")`,
+            backgroundImage: book?.imageLinks?.smallThumbnail ? `url("${book.imageLinks.smallThumbnail}")` : 'none',
           }}
         />
         <div className={`book-shelf-changer ${isChangingShelf ? 'book-shelf-changer--spinning' : ''}`}>
